@@ -1,5 +1,8 @@
 #!/sbin/env bash
 
+set -e # to exit on failures
+set -u # to exit on undefined variables
+
 # variables
 ami=$(whoami)
 echo $ami
@@ -55,7 +58,7 @@ if [[ ${#filename} > 5 ]]; then
     cat $filename
 else
     echo "Something broke"
-    # exit 1
+    # exit 1 - exit code
 fi
 
 echo "hello"
@@ -85,7 +88,7 @@ else
 fi
 
 file="./newfile1"
-if [[ -f $file ]]; then
+if [[ -f $file ]]; then # -d for directories, -e for both
     echo "The file exists"
 else
     echo "The file doest not exist"
@@ -96,3 +99,37 @@ if [[ -f $file ]] && [[ -r $file ]]; then
 else
     echo "The file does not exist or you don't have the permission to read it"  
 fi
+
+echo "Sleeping for 1 seconds"
+sleep 1
+
+echo "Type your name" && read -r name
+echo $name
+
+
+read -p "Do you want to continue (Y/N) " resp
+if [[ resp != "Y" ]]; then
+    echo "Continuing"
+else
+    exit 1
+fi
+
+echo "If this message was shown successfully..." && echo "then, this is going to be shown"
+# if the first succeeds, perform the next
+
+echo "----------------"
+
+echo "if the first message was not shown successfully" || echo "then, this second one must be shown regardless"
+# if the first fails, than execute the second
+
+false | echo "fails, but execute" # the pipe is executed, even if the first condition is false and "set -e" is setted
+
+set -eo #pipefail
+false | echo "fails, but dont execute"
+
+
+set -euo pipefail # to not ignore failures, undefined variables and pipes
+
+
+arr=(1 2 3 4 5)
+echo ${arr[0]}
