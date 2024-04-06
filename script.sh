@@ -25,6 +25,23 @@ touch youcantseethecontent
 echo "A lucid content" >> youcantseethecontent
 shred youcantseethecontent
 
+echo $(whatis whoami)
+echo "Node location: $(which node)"
+echo "All Node locations: $(whereis node)"
 
+echo $(cmp newfile2 newfile2)
+
+echo "----------------"
+cat newfile1 | sort
+echo "----------------"
+find ~/dev/QuestifyHub -name server.js
+
+
+
+cat newfile2 | grep pret
+uname -a
+
+
+echo $(history)
 
 
