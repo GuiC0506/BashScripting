@@ -54,5 +54,45 @@ echo ${#filename}
 if [[ ${#filename} > 5 ]]; then
     cat $filename
 else
-    echo "Not a valid condition"
+    echo "Something broke"
+    # exit 1
+fi
+
+echo "hello"
+
+# string comparison
+var="a"
+if [[ $var == "a" ]]; then
+    echo "It is equal to a"
+else
+    echo "It is not equal to a"
+fi
+
+# numerical comparison
+number=3
+if [[ $number -eq 1 ]] || [[ $number -lt 4 ]]; then
+    echo "The condition is true"
+else
+    echo "The condition is not true"
+fi
+
+random="churros"
+#check if it is not null
+if [[ -z $random ]]; then
+    echo "The value is null"
+else
+    echo "The value is not null"
+fi
+
+file="./newfile1"
+if [[ -f $file ]]; then
+    echo "The file exists"
+else
+    echo "The file doest not exist"
+fi
+
+if [[ -f $file ]] && [[ -r $file ]]; then
+    echo "The file exist and i have the permission to read it"
+else
+    echo "The file does not exist or you don't have the permission to read it"  
 fi
