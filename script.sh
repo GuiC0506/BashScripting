@@ -5,7 +5,7 @@ ami=$(whoami)
 echo $ami
 echo "Variables"
 name="Churros"
-echo "Hello $name"
+echo "$name"
 echo "Hello ${name}"
 echo "Hello ${#name}" # length of name
 echo "Hello ${dog:-"Shoyou"}" # default value if dog does not exist
@@ -44,4 +44,15 @@ uname -a
 
 echo $(history)
 
+echo $((3 + 3 / 3 * 3 + 10))
 
+# command line args
+filename=$1
+echo ${#filename}
+
+# conditions
+if [[ ${#filename} > 5 ]]; then
+    cat $filename
+else
+    echo "Not a valid condition"
+fi
