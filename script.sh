@@ -124,12 +124,39 @@ echo "if the first message was not shown successfully" || echo "then, this secon
 
 false | echo "fails, but execute" # the pipe is executed, even if the first condition is false and "set -e" is setted
 
-set -eo #pipefail
+#set -euo pipefail
 false | echo "fails, but dont execute"
 
 
-set -euo pipefail # to not ignore failures, undefined variables and pipes
+# set -euo pipefail # to not ignore failures, undefined variables and pipes
 
 
+# arrays
 arr=(1 2 3 4 5)
 echo ${arr[0]}
+echo ${arr[@]}
+echo ${#arr[@]} # length of array
+
+# loops
+
+echo "----------------"
+for number in ${arr[@]}; do
+    echo $number
+done
+
+echo "----------------"
+for ((i=0; i < ${#arr[@]}; ++i)); do
+    echo ${arr[i]}
+done
+
+echo "----------------"
+length=${#arr[@]}
+
+for i in {1..2}; do
+    echo ${arr[i]}
+done
+
+
+for file in $(ls); do
+    echo $file
+done
